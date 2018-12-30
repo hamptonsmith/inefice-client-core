@@ -39,7 +39,7 @@ module.exports = class extends EventEmitter {
                     break;
                 }
                 case 'update': {
-                    const toModify = getEditParent(message);
+                    const toModify = getEditParent.call(this, message);
                     toModify[message.path[message.path.length - 1]] =
                             message.value;
                     
