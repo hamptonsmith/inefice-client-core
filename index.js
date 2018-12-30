@@ -25,7 +25,7 @@ module.exports = class extends EventEmitter {
                     break;
                 }
                 case 'insert': {
-                    const toModify = getEditParent(message);
+                    const toModify = getEditParent.call(this, message);
                     
                     if (Array.isArray(toModify)) {
                         toModify.splice(message.path[message.path.length - 1],
@@ -46,7 +46,7 @@ module.exports = class extends EventEmitter {
                     break;
                 }
                 case 'delete': {
-                    const toModify = getEditParent(message);
+                    const toModify = getEditParent.call(this, message);
                     
                     if (Array.isArray(toModify)) {
                         toModify.splice(
@@ -80,7 +80,7 @@ function navigate(root, path, i) {
     
     let result;
     if (i < path.length) {
-        result = navigate(root, path, i + 1);
+        result = navigate(root[path[i]], path, i + 1);
     }
     else {
         result = root;
